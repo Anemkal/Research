@@ -43,11 +43,10 @@ def train(model, x, y_true, epochs=10000, lr=0.5):
     return model
 
 
-X_np = [[0, 0], [0, 1], [1, 0], [1, 1]]
-y_np = [0, 1, 1, 0]
-
-X = torch.tensor(X_np, dtype=torch.float32)
-y = torch.tensor(y_np, dtype=torch.long)
+a = [[0, 0], [0, 1], [1, 0], [1, 1]]
+b = [0, 1, 1, 0]
+X = torch.tensor(a, dtype=torch.float32)
+y = torch.tensor(b, dtype=torch.long)
 model = MLP(input_dim=2, hidden_dims=[4, 4], output_dim=2)
 model = train(model, X, y)
 
