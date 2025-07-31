@@ -49,19 +49,6 @@ class MLP(nn.Module):
 
 
 # training
-# def train(model, x, y_true, epochs=10000, lr=0.5):
-#     criterion = nn.CrossEntropyLoss()
-#     optimizer = torch.optim.SGD(model.parameters(), lr=lr)
-#
-#     for epoch in range(epochs):
-#         optimizer.zero_grad()
-#         logits = model(x)
-#         loss = criterion(logits, y_true)
-#         loss.backward()
-#         optimizer.step()
-#         if epoch % 100 == 0:
-#             print(f"Epoch {epoch}, Loss: {loss.item():.6f}")
-#     return model
 
 def train(model, dataloader, epochs=5, lr=0.01):
     criterion = nn.CrossEntropyLoss()
@@ -70,7 +57,7 @@ def train(model, dataloader, epochs=5, lr=0.01):
     for epoch in range(epochs):
         total_loss = 0.0
         for images, labels in dataloader:
-            images = images.view(images.size(0), -1)  # Flatten [B, 3, 32, 32] → [B, 3072]
+            images = images.view(images.size(0), -1)
 
             optimizer.zero_grad()
             outputs = model(images)
@@ -83,20 +70,8 @@ def train(model, dataloader, epochs=5, lr=0.01):
         print(f"Epoch {epoch + 1}, Loss: {total_loss:.4f}")
 
 
-# a = [[0, 0], [0, 1], [1, 0], [1, 1]]
-# b = [0, 1, 1, 0]
-#
-# X = torch.tensor(a, dtype=torch.float32)
-# y = torch.tensor(b, dtype=torch.long)
-# model = MLP(input_dim=2, hidden_dims=[4, 4], output_dim=2)
-# model = train(model, X, y)
-#
-# # testing
-# with torch.no_grad():
-#     logits = model(X)
-#     predicted_classes = logits.argmax(dim=1)
-#     print("Predicted labels:", predicted_classes.numpy())
-#     print("True labels:", y.numpy())
+# testing
+
 
 input_dim = 3 * 32 * 32
 output_dim = 10
